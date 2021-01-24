@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -22,7 +17,43 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 3,
             ),
           ),
-          child: Row(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InkWell(
+                enableFeedback: true,
+                highlightColor: Theme.of(context).accentColor,
+                onTap: () {},
+                child: Icon(
+                  Icons.today_rounded,
+                  color: Theme.of(context).primaryColor,
+                  size: size.height * 0.05,
+                ),
+              ),
+              InkWell(
+                enableFeedback: true,
+                highlightColor: Theme.of(context).accentColor,
+                onTap: () {
+                  Navigator.pushNamed(context, '/apps');
+                },
+                child: Icon(
+                  Icons.apps,
+                  color: Theme.of(context).primaryColor,
+                  size: size.height * 0.05,
+                ),
+              ),
+              InkWell(
+                enableFeedback: true,
+                highlightColor: Theme.of(context).accentColor,
+                onTap: () {},
+                child: Icon(
+                  Icons.filter_4,
+                  color: Theme.of(context).primaryColor,
+                  size: size.height * 0.05,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

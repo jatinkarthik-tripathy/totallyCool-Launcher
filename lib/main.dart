@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:launcher/screens/apps.dart';
 import 'package:launcher/screens/home.dart';
 
 void main() {
@@ -21,6 +22,10 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFF29A0B1),
       ),
       home: MyHomePage(),
+      routes: <String, WidgetBuilder>{
+        '/home': (BuildContext context) => MyHomePage(),
+        '/apps': (BuildContext context) => Apps(),
+      },
     );
   }
 }
