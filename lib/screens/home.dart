@@ -25,7 +25,7 @@ class MyHomePage extends StatelessWidget {
                 InkWell(
                   enableFeedback: true,
                   highlightColor: Theme.of(context).accentColor,
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, '/todo'),
                   child: Icon(
                     Icons.today_rounded,
                     color: Theme.of(context).primaryColor,
@@ -35,9 +35,7 @@ class MyHomePage extends StatelessWidget {
                 InkWell(
                   enableFeedback: true,
                   highlightColor: Theme.of(context).accentColor,
-                  onTap: () {
-                    Navigator.pushNamed(context, '/apps');
-                  },
+                  onTap: () => Navigator.pushNamed(context, '/apps'),
                   child: Icon(
                     Icons.apps,
                     color: Theme.of(context).primaryColor,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:launcher/screens/apps.dart';
 import 'package:launcher/screens/home.dart';
+import 'package:launcher/screens/todo.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => MyHomePage(),
         '/apps': (BuildContext context) => Apps(),
+        '/todo': (BuildContext context) => ToDo(),
       },
     );
   }
