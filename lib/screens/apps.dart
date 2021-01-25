@@ -49,7 +49,7 @@ class Apps extends StatelessWidget {
                               fit: BoxFit.contain,
                               child: Text(
                                 app.appName == "YouTube Music"
-                                    ? "YT Mudic"
+                                    ? "YT Music"
                                     : '${app.appName}',
                                 style: TextStyle(
                                   color: Colors.white,

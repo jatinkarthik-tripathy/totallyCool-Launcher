@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Launcher',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: "Poppins",
         backgroundColor: Color(0xFF202124),
         primaryColor: Color(0xFF167D7F),
         accentColor: Color(0xFF29A0B1),

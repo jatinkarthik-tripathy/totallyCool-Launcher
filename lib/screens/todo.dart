@@ -40,11 +40,12 @@ class _ToDoState extends State<ToDo> {
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                "Work",
+                                "WorkStuff",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 32,
                                   color: Theme.of(context).backgroundColor,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -129,6 +130,8 @@ class _ToDoState extends State<ToDo> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 32,
+                                  color: Theme.of(context).backgroundColor,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -201,6 +204,8 @@ class _ToDoState extends State<ToDo> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 32,
+                                  color: Theme.of(context).backgroundColor,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
