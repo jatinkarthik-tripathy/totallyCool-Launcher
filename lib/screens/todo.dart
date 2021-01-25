@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:launcher/widgets/bottomModalEntry.dart';
 
 class ToDo extends StatefulWidget {
   @override
@@ -259,13 +260,7 @@ class _ToDoState extends State<ToDo> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.add,
-          color: Theme.of(context).backgroundColor,
-        ),
-      ),
+      floatingActionButton: BottomModalEntry(),
     );
   }
 }
