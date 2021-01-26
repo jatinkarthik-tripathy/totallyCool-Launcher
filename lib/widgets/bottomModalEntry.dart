@@ -18,6 +18,21 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
 
   TextEditingController _todoController = TextEditingController();
 
+  DateTime _selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context, StateSetter state) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: _selectedDate,
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != _selectedDate)
+      state(() {
+        _selectedDate = picked;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,7 +56,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
               return Padding(
                 padding: MediaQuery.of(context).viewInsets,
                 child: Container(
-                  height: size.height * 0.5,
+                  height: size.height * 0.55,
                   width: size.width,
                   padding: EdgeInsets.all(30),
                   child: Container(
@@ -185,6 +200,27 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                             ),
                           ],
                         ),
+                        _isUrgent
+                            ? Container(
+                                width: size.width * 0.8,
+                                child: Center(
+                                  child: FlatButton(
+                                    child: Text(
+                                      'Select Date',
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
+                                    onPressed: () =>
+                                        _selectDate(context, state),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(
+                                height: 0,
+                              ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
