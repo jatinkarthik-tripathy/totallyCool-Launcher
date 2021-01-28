@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:launcher/models/entry.dart';
+import 'package:launcher/utils/dbUtilsClass.dart';
 
 enum SingingCharacter { work, personal }
 
@@ -294,7 +296,21 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                                       color: Theme.of(context).accentColor,
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    Entry entry = Entry(
+                                      _titleController.text,
+                                      _todoController.text,
+                                      _isUrgent,
+                                      _isImportant,
+                                      _character == SingingCharacter.work
+                                          ? 1
+                                          : 2,
+                                      _selectedDate,
+                                    );
+                                    await DBUtilsClass.setEntry(entry);
+                                    print(await DBUtilsClass.getEntry());
+                                    Navigator.of(context).pop();
+                                  },
                                 ),
                               ),
                             ),

@@ -3,8 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:launcher/screens/apps.dart';
 import 'package:launcher/screens/home.dart';
 import 'package:launcher/screens/todo.dart';
+import 'package:launcher/utils/dbUtilsClass.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  DBUtilsClass.initDatabase();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Color(0xFF202124),
   ));
@@ -12,7 +15,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MaterialColor myColor = MaterialColor(
+  final MaterialColor myColor = MaterialColor(
     0xFF29A0B1,
     {
       50: Color(0xFF29A0B1),

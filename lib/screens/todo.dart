@@ -143,6 +143,7 @@ class _ToDoState extends State<ToDo> {
                           child: IconButton(
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
+                              color: Theme.of(context).backgroundColor,
                               size: size.height * 0.05,
                             ),
                             onPressed: () {
@@ -218,6 +219,7 @@ class _ToDoState extends State<ToDo> {
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
                               size: size.height * 0.05,
+                              color: Theme.of(context).backgroundColor,
                             ),
                             onPressed: () {
                               setState(() {
