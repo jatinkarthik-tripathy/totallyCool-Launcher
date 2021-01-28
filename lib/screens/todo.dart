@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:launcher/models/entry.dart';
+import 'package:launcher/utils/dbUtilsClass.dart';
 import 'package:launcher/widgets/bottomModalEntry.dart';
 
 class ToDo extends StatefulWidget {
@@ -82,25 +84,48 @@ class _ToDoState extends State<ToDo> {
                           ),
                     _toggle1
                         ? Container(
-                            height: size.height * 0.45,
-                            child: ListView(
-                              physics: BouncingScrollPhysics(),
-                              children: [
-                                ListTile(
-                                  title: Text(
-                                    "test",
-                                    style: TextStyle(fontSize: 24),
-                                  ),
-                                  trailing: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.info_outline_rounded,
-                                      color: Theme.of(context).backgroundColor,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
+                            height: size.height * 0.49,
+                            child: FutureBuilder<List<Entry>>(
+                                future: DBUtilsClass.getEntry(
+                                  'category = ?',
+                                  "1",
+                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<Entry> entries = snapshot.data;
+                                    return ListView.separated(
+                                      itemCount: entries.length,
+                                      itemBuilder: (context, idx) {
+                                        Entry entry = entries[idx];
+                                        return ListTile(
+                                          title: Text(
+                                            entry.title,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Theme.of(context)
+                                                  .backgroundColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return Divider(
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                        );
+                                      },
+                                    );
+                                  }
+                                  return Center(
+                                    child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                            accentColor: Theme.of(context)
+                                                .backgroundColor),
+                                        child: CircularProgressIndicator()),
+                                  );
+                                }),
                           )
                         : SizedBox(
                             height: 0,
@@ -168,14 +193,48 @@ class _ToDoState extends State<ToDo> {
                           ),
                     _toggle2
                         ? Container(
-                            height: size.height * 0.45,
-                            child: ListView(
-                              physics: BouncingScrollPhysics(),
-                              children: [
-                                Text("test"),
-                                Text("test"),
-                              ],
-                            ),
+                            height: size.height * 0.49,
+                            child: FutureBuilder<List<Entry>>(
+                                future: DBUtilsClass.getEntry(
+                                  'category = ?',
+                                  "2",
+                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<Entry> entries = snapshot.data;
+                                    return ListView.separated(
+                                      itemCount: entries.length,
+                                      itemBuilder: (context, idx) {
+                                        Entry entry = entries[idx];
+                                        return ListTile(
+                                          title: Text(
+                                            entry.title,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Theme.of(context)
+                                                  .backgroundColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return Divider(
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                        );
+                                      },
+                                    );
+                                  }
+                                  return Center(
+                                    child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                            accentColor: Theme.of(context)
+                                                .backgroundColor),
+                                        child: CircularProgressIndicator()),
+                                  );
+                                }),
                           )
                         : SizedBox(
                             height: 0,
@@ -243,14 +302,48 @@ class _ToDoState extends State<ToDo> {
                           ),
                     _toggle3
                         ? Container(
-                            height: size.height * 0.45,
-                            child: ListView(
-                              physics: BouncingScrollPhysics(),
-                              children: [
-                                Text("test"),
-                                Text("test"),
-                              ],
-                            ),
+                            height: size.height * 0.49,
+                            child: FutureBuilder<List<Entry>>(
+                                future: DBUtilsClass.getEntry(
+                                  'isUrgent = ?',
+                                  "1",
+                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<Entry> entries = snapshot.data;
+                                    return ListView.separated(
+                                      itemCount: entries.length,
+                                      itemBuilder: (context, idx) {
+                                        Entry entry = entries[idx];
+                                        return ListTile(
+                                          title: Text(
+                                            entry.title,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Theme.of(context)
+                                                  .backgroundColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return Divider(
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                        );
+                                      },
+                                    );
+                                  }
+                                  return Center(
+                                    child: Theme(
+                                        data: Theme.of(context).copyWith(
+                                            accentColor: Theme.of(context)
+                                                .backgroundColor),
+                                        child: CircularProgressIndicator()),
+                                  );
+                                }),
                           )
                         : SizedBox(
                             height: 0,

@@ -308,7 +308,6 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                                       _selectedDate,
                                     );
                                     await DBUtilsClass.setEntry(entry);
-                                    print(await DBUtilsClass.getEntry());
                                     Navigator.of(context).pop();
                                   },
                                 ),
