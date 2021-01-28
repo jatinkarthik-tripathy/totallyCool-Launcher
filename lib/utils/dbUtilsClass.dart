@@ -49,9 +49,8 @@ class DBUtilsClass {
           val1,
           val2,
           maps[i]['category'],
-          DateTime.parse(
-            maps[i]['date'],
-          ),
+          maps[i]['date'],
+          maps[i]['id'],
         );
       },
     );

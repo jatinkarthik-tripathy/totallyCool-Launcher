@@ -21,7 +21,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
   TextEditingController _todoController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
-
+  String _dateString = '';
   Future<void> _selectDate(BuildContext context, StateSetter state) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -31,7 +31,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
     );
     if (picked != null && picked != _selectedDate)
       state(() {
-        _selectedDate = picked;
+        _dateString = picked.toString();
       });
   }
 
@@ -297,16 +297,25 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    Entry entry = Entry(
-                                      _titleController.text,
-                                      _todoController.text,
-                                      _isUrgent,
-                                      _isImportant,
-                                      _character == SingingCharacter.work
-                                          ? 1
-                                          : 2,
-                                      _selectedDate,
-                                    );
+                                    Entry entry = _dateString == ''
+                                        ? Entry(
+                                            _titleController.text,
+                                            _todoController.text,
+                                            _isUrgent,
+                                            _isImportant,
+                                            _character == SingingCharacter.work
+                                                ? 1
+                                                : 2,
+                                          )
+                                        : Entry(
+                                            _titleController.text,
+                                            _todoController.text,
+                                            _isUrgent,
+                                            _isImportant,
+                                            _character == SingingCharacter.work
+                                                ? 1
+                                                : 2,
+                                            _dateString);
                                     await DBUtilsClass.setEntry(entry);
                                     Navigator.of(context).pop();
                                   },

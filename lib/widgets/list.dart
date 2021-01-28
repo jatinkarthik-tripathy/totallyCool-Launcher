@@ -22,6 +22,10 @@ Widget styledQueriedList({
           itemBuilder: (context, idx) {
             Entry entry = entries[idx];
             return ListTile(
+              onTap: () {
+                print(entry.date);
+                print(entry.id);
+              },
               contentPadding:
                   EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
               visualDensity: VisualDensity(horizontal: -4, vertical: -2),
@@ -55,13 +59,10 @@ Widget styledQueriedList({
                   ? SizedBox(
                       width: 0,
                     )
-                  : IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.info_outline,
-                        color: mainStylingColor,
-                        size: textFontSize,
-                      ),
+                  : Icon(
+                      Icons.info_outline,
+                      color: mainStylingColor,
+                      size: textFontSize,
                     ),
             );
           },
