@@ -23,8 +23,7 @@ Widget styledQueriedList({
             Entry entry = entries[idx];
             return ListTile(
               onTap: () {
-                print(entry.date);
-                print(entry.id);
+                DBUtilsClass.deleteEntry(1);
               },
               contentPadding:
                   EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),

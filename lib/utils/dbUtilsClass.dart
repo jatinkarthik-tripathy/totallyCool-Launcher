@@ -55,4 +55,25 @@ class DBUtilsClass {
       },
     );
   }
+
+  static Future<void> updateEntry(
+    Entry updatedEntry,
+  ) async {
+    final Database db = _database;
+    await db.update(
+      _tableName,
+      updatedEntry.toMap(),
+      where: "id = ?",
+      whereArgs: [updatedEntry.id],
+    );
+  }
+
+  static Future<void> deleteEntry(int id) async {
+    final Database db = _database;
+    await db.delete(
+      _tableName,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+  }
 }
