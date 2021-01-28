@@ -14,7 +14,7 @@ Future<List<Application>> curatedApps() async {
     "Drive",
     "Solid Explorer",
     "YouTube Music",
-    "Chrome",
+    "Clock",
     "Phone",
     "Gmail"
   ];

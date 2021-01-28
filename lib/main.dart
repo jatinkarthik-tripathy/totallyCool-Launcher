@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:launcher/screens/apps.dart';
+import 'package:launcher/screens/eisenhowerMatrix.dart';
 import 'package:launcher/screens/home.dart';
 import 'package:launcher/screens/todo.dart';
 import 'package:launcher/utils/dbUtilsClass.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext context) => MyHomePage(),
         '/apps': (BuildContext context) => Apps(),
         '/todo': (BuildContext context) => ToDo(),
+        '/matrix': (BuildContext context) => EisenhowerMatrix(),
       },
     );
   }

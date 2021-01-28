@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:launcher/models/entry.dart';
-import 'package:launcher/utils/dbUtilsClass.dart';
 import 'package:launcher/widgets/bottomModalEntry.dart';
+import 'package:launcher/widgets/list.dart';
 
 class ToDo extends StatefulWidget {
   @override
@@ -85,47 +84,14 @@ class _ToDoState extends State<ToDo> {
                     _toggle1
                         ? Container(
                             height: size.height * 0.49,
-                            child: FutureBuilder<List<Entry>>(
-                                future: DBUtilsClass.getEntry(
-                                  'category = ?',
-                                  "1",
-                                ),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    List<Entry> entries = snapshot.data;
-                                    return ListView.separated(
-                                      itemCount: entries.length,
-                                      itemBuilder: (context, idx) {
-                                        Entry entry = entries[idx];
-                                        return ListTile(
-                                          title: Text(
-                                            entry.title,
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              color: Theme.of(context)
-                                                  .backgroundColor,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return Divider(
-                                          color:
-                                              Theme.of(context).backgroundColor,
-                                        );
-                                      },
-                                    );
-                                  }
-                                  return Center(
-                                    child: Theme(
-                                        data: Theme.of(context).copyWith(
-                                            accentColor: Theme.of(context)
-                                                .backgroundColor),
-                                        child: CircularProgressIndicator()),
-                                  );
-                                }),
+                            child: styledQueriedList(
+                              whereString: 'category = ?',
+                              whereArgsStringList: ['1'],
+                              mainStylingColor:
+                                  Theme.of(context).backgroundColor,
+                              textFontSize: 24,
+                              isLeadingNeeded: false,
+                            ),
                           )
                         : SizedBox(
                             height: 0,
@@ -194,47 +160,14 @@ class _ToDoState extends State<ToDo> {
                     _toggle2
                         ? Container(
                             height: size.height * 0.49,
-                            child: FutureBuilder<List<Entry>>(
-                                future: DBUtilsClass.getEntry(
-                                  'category = ?',
-                                  "2",
-                                ),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    List<Entry> entries = snapshot.data;
-                                    return ListView.separated(
-                                      itemCount: entries.length,
-                                      itemBuilder: (context, idx) {
-                                        Entry entry = entries[idx];
-                                        return ListTile(
-                                          title: Text(
-                                            entry.title,
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              color: Theme.of(context)
-                                                  .backgroundColor,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return Divider(
-                                          color:
-                                              Theme.of(context).backgroundColor,
-                                        );
-                                      },
-                                    );
-                                  }
-                                  return Center(
-                                    child: Theme(
-                                        data: Theme.of(context).copyWith(
-                                            accentColor: Theme.of(context)
-                                                .backgroundColor),
-                                        child: CircularProgressIndicator()),
-                                  );
-                                }),
+                            child: styledQueriedList(
+                              whereString: 'category = ?',
+                              whereArgsStringList: ['2'],
+                              mainStylingColor:
+                                  Theme.of(context).backgroundColor,
+                              textFontSize: 24,
+                              isLeadingNeeded: false,
+                            ),
                           )
                         : SizedBox(
                             height: 0,
@@ -303,47 +236,14 @@ class _ToDoState extends State<ToDo> {
                     _toggle3
                         ? Container(
                             height: size.height * 0.49,
-                            child: FutureBuilder<List<Entry>>(
-                                future: DBUtilsClass.getEntry(
-                                  'isUrgent = ?',
-                                  "1",
-                                ),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    List<Entry> entries = snapshot.data;
-                                    return ListView.separated(
-                                      itemCount: entries.length,
-                                      itemBuilder: (context, idx) {
-                                        Entry entry = entries[idx];
-                                        return ListTile(
-                                          title: Text(
-                                            entry.title,
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              color: Theme.of(context)
-                                                  .backgroundColor,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return Divider(
-                                          color:
-                                              Theme.of(context).backgroundColor,
-                                        );
-                                      },
-                                    );
-                                  }
-                                  return Center(
-                                    child: Theme(
-                                        data: Theme.of(context).copyWith(
-                                            accentColor: Theme.of(context)
-                                                .backgroundColor),
-                                        child: CircularProgressIndicator()),
-                                  );
-                                }),
+                            child: styledQueriedList(
+                              whereString: 'isUrgent = ?',
+                              whereArgsStringList: ['1'],
+                              mainStylingColor:
+                                  Theme.of(context).backgroundColor,
+                              textFontSize: 24,
+                              isLeadingNeeded: false,
+                            ),
                           )
                         : SizedBox(
                             height: 0,

@@ -28,13 +28,14 @@ class DBUtilsClass {
     );
   }
 
-  static Future<List<Entry>> getEntry(String where, String whereArgs) async {
+  static Future<List<Entry>> getEntry(
+      String where, List<String> whereArgs) async {
     final Database db = _database;
 
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: where,
-      whereArgs: [whereArgs],
+      whereArgs: whereArgs,
     );
 
     return List.generate(

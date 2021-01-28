@@ -45,7 +45,7 @@ class MyHomePage extends StatelessWidget {
                 InkWell(
                   enableFeedback: true,
                   highlightColor: Theme.of(context).accentColor,
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, '/matrix'),
                   child: Icon(
                     Icons.filter_4,
                     color: Theme.of(context).primaryColor,
