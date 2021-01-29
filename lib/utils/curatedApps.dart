@@ -26,5 +26,8 @@ Future<List<Application>> curatedApps() async {
       }
     }
   });
-  return curatedApps;
+  apps.sort((a, b) {
+    return a.appName.compareTo(b.appName);
+  });
+  return apps;
 }
