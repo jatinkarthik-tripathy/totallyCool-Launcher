@@ -16,6 +16,19 @@ class _ToDoState extends State<ToDo> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+        elevation: 0,
+        title: Text("ToDo"),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 24,
+            color: Theme.of(context).backgroundColor,
+          ),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+        ),
+      ),
       body: Center(
         child: Container(
           width: size.width * 0.9,
@@ -183,7 +196,7 @@ class _ToDoState extends State<ToDo> {
                 ),
                 width: size.width * 0.9,
                 height: _toggle3 ? size.height * 0.6 : size.height * 0.1,
-                color: Colors.blueGrey,
+                color: Colors.blueGrey[600],
                 child: Column(
                   children: [
                     Row(
@@ -241,7 +254,7 @@ class _ToDoState extends State<ToDo> {
                               mainStylingColor:
                                   Theme.of(context).backgroundColor,
                               textFontSize: 24,
-                              isLeadingNeeded: false,
+                              isLeadingNeeded: true,
                               isSortingNeeded: true,
                             ),
                           )

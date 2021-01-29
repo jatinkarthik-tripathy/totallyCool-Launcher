@@ -323,6 +323,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                                     _todoController.clear();
                                     _isUrgent = false;
                                     _isImportant = false;
+                                    _selectedDate = DateTime.now();
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -345,6 +346,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                                     _todoController.clear();
                                     _isUrgent = false;
                                     _isImportant = false;
+                                    _selectedDate = DateTime.now();
                                     Navigator.of(context).pop();
                                   },
                                 ),

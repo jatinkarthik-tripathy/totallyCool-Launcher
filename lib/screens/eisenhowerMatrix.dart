@@ -8,6 +8,19 @@ class EisenhowerMatrix extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).accentColor,
+          elevation: 0,
+          title: Text("Eisenhower Matrix"),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              size: 24,
+              color: Theme.of(context).backgroundColor,
+            ),
+            onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+          ),
+        ),
         body: Container(
           height: size.height,
           width: size.width,
@@ -47,7 +60,7 @@ class EisenhowerMatrix extends StatelessWidget {
                 ],
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,8 +87,8 @@ class EisenhowerMatrix extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    height: size.height * 0.9,
                     width: size.width * 0.9,
+                    height: size.height * 0.85,
                     child: GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: size.width / size.height,

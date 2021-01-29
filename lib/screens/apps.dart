@@ -8,6 +8,19 @@ class Apps extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+        elevation: 0,
+        title: Text("Apps"),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 24,
+            color: Theme.of(context).backgroundColor,
+          ),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+        ),
+      ),
       body: Center(
         child: FutureBuilder<List<Application>>(
           future: curatedApps(),

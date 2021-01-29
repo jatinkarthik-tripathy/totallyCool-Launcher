@@ -10,7 +10,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   DBUtilsClass.initDatabase();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Color(0xFF202124),
+    statusBarColor: Color(0xFF29A0B1),
   ));
   runApp(MyApp());
 }
