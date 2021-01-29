@@ -94,11 +94,13 @@ class EisenhowerMatrix extends StatelessWidget {
                             ),
                           ),
                           child: styledQueriedList(
-                              whereString: 'isUrgent = ? AND isImportant = ?',
-                              whereArgsStringList: ['1', '1'],
-                              mainStylingColor: Theme.of(context).primaryColor,
-                              textFontSize: 18,
-                              isLeadingNeeded: true),
+                            whereString: 'isUrgent = ? AND isImportant = ?',
+                            whereArgsStringList: ['1', '1'],
+                            mainStylingColor: Theme.of(context).primaryColor,
+                            textFontSize: 18,
+                            isLeadingNeeded: true,
+                            isSortingNeeded: false,
+                          ),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -114,11 +116,13 @@ class EisenhowerMatrix extends StatelessWidget {
                             ),
                           ),
                           child: styledQueriedList(
-                              whereString: 'isUrgent = ? AND isImportant = ?',
-                              whereArgsStringList: ['0', '1'],
-                              mainStylingColor: Theme.of(context).primaryColor,
-                              textFontSize: 18,
-                              isLeadingNeeded: true),
+                            whereString: 'isUrgent = ? AND isImportant = ?',
+                            whereArgsStringList: ['0', '1'],
+                            mainStylingColor: Theme.of(context).primaryColor,
+                            textFontSize: 18,
+                            isLeadingNeeded: true,
+                            isSortingNeeded: false,
+                          ),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -134,11 +138,13 @@ class EisenhowerMatrix extends StatelessWidget {
                             ),
                           ),
                           child: styledQueriedList(
-                              whereString: 'isUrgent = ? AND isImportant = ?',
-                              whereArgsStringList: ['1', '0'],
-                              mainStylingColor: Theme.of(context).primaryColor,
-                              textFontSize: 18,
-                              isLeadingNeeded: true),
+                            whereString: 'isUrgent = ? AND isImportant = ?',
+                            whereArgsStringList: ['1', '0'],
+                            mainStylingColor: Theme.of(context).primaryColor,
+                            textFontSize: 18,
+                            isLeadingNeeded: true,
+                            isSortingNeeded: false,
+                          ),
                         ),
                         Container(
                           decoration: BoxDecoration(
@@ -154,11 +160,13 @@ class EisenhowerMatrix extends StatelessWidget {
                             ),
                           ),
                           child: styledQueriedList(
-                              whereString: 'isUrgent = ? AND isImportant = ?',
-                              whereArgsStringList: ['0', '0'],
-                              mainStylingColor: Theme.of(context).primaryColor,
-                              textFontSize: 18,
-                              isLeadingNeeded: true),
+                            whereString: 'isUrgent = ? AND isImportant = ?',
+                            whereArgsStringList: ['0', '0'],
+                            mainStylingColor: Theme.of(context).primaryColor,
+                            textFontSize: 18,
+                            isLeadingNeeded: true,
+                            isSortingNeeded: false,
+                          ),
                         )
                       ],
                     ),

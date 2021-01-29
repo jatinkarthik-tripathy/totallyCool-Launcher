@@ -90,6 +90,7 @@ class _ToDoState extends State<ToDo> {
                                   Theme.of(context).backgroundColor,
                               textFontSize: 24,
                               isLeadingNeeded: false,
+                              isSortingNeeded: false,
                             ),
                           )
                         : SizedBox(
@@ -165,6 +166,7 @@ class _ToDoState extends State<ToDo> {
                                   Theme.of(context).backgroundColor,
                               textFontSize: 24,
                               isLeadingNeeded: false,
+                              isSortingNeeded: false,
                             ),
                           )
                         : SizedBox(
@@ -240,6 +242,7 @@ class _ToDoState extends State<ToDo> {
                                   Theme.of(context).backgroundColor,
                               textFontSize: 24,
                               isLeadingNeeded: false,
+                              isSortingNeeded: true,
                             ),
                           )
                         : SizedBox(

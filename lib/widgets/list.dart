@@ -9,6 +9,7 @@ Widget styledQueriedList({
   Color mainStylingColor,
   double textFontSize,
   bool isLeadingNeeded,
+  bool isSortingNeeded,
 }) {
   return FutureBuilder<List<Entry>>(
     future: DBUtilsClass.getEntry(
@@ -18,6 +19,13 @@ Widget styledQueriedList({
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         List<Entry> entries = snapshot.data;
+        if (isSortingNeeded) {
+          entries.sort((a, b) {
+            String date1 = a.date;
+            String date2 = b.date;
+            return date1.compareTo(date2);
+          });
+        }
         return ListView.separated(
           itemCount: entries.length,
           itemBuilder: (context, idx) {
@@ -62,6 +70,18 @@ Widget styledQueriedList({
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
               ),
+              subtitle: entry.isUrgent
+                  ? Text(
+                      "DeadLine : ${DateTime.parse(entry.date).day}-${DateTime.parse(entry.date).month}-${DateTime.parse(entry.date).year}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).backgroundColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  : SizedBox(
+                      height: 0,
+                    ),
               trailing: isLeadingNeeded
                   ? SizedBox(
                       width: 0,
