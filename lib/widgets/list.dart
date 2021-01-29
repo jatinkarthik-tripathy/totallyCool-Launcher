@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:launcher/models/entry.dart';
+import 'package:launcher/screens/displayPage.dart';
 import 'package:launcher/utils/dbUtilsClass.dart';
 
 Widget styledQueriedList({
@@ -23,7 +24,14 @@ Widget styledQueriedList({
             Entry entry = entries[idx];
             return ListTile(
               onTap: () {
-                DBUtilsClass.deleteEntry(1);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DisplayPage(
+                      entry: entry,
+                    ),
+                  ),
+                );
               },
               contentPadding:
                   EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),

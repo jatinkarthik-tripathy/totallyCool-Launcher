@@ -14,7 +14,6 @@ class Apps extends StatelessWidget {
           builder: (context, AsyncSnapshot<List<Application>> snapshot) {
             if (snapshot.hasData) {
               List<Application> apps = snapshot.data;
-              print(apps.length);
               return Container(
                 width: size.width * 0.9,
                 height: size.height * 0.8,

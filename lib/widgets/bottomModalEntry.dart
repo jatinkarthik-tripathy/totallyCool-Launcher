@@ -21,7 +21,6 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
   TextEditingController _todoController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
-  String _dateString = '';
   Future<void> _selectDate(BuildContext context, StateSetter state) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -31,7 +30,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
     );
     if (picked != null && picked != _selectedDate)
       state(() {
-        _dateString = picked.toString();
+        _selectedDate = picked;
       });
   }
 
@@ -203,22 +202,35 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                           ],
                         ),
                         _isUrgent
-                            ? Container(
-                                width: size.width * 0.8,
-                                child: Center(
-                                  child: FlatButton(
-                                    child: Text(
-                                      'Select Date',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).accentColor,
+                            ? Column(
+                                children: [
+                                  Text(
+                                    "DeadLine : ${_selectedDate.day}-${_selectedDate.month}-${_selectedDate.year}",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: size.width * 0.8,
+                                    child: Center(
+                                      child: FlatButton(
+                                        child: Text(
+                                          'Select Date',
+                                          style: TextStyle(
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w600,
+                                            color:
+                                                Theme.of(context).accentColor,
+                                          ),
+                                        ),
+                                        onPressed: () =>
+                                            _selectDate(context, state),
                                       ),
                                     ),
-                                    onPressed: () =>
-                                        _selectDate(context, state),
                                   ),
-                                ),
+                                ],
                               )
                             : SizedBox(
                                 height: 0,
@@ -297,26 +309,20 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                                     ),
                                   ),
                                   onPressed: () async {
-                                    Entry entry = _dateString == ''
-                                        ? Entry(
-                                            _titleController.text,
-                                            _todoController.text,
-                                            _isUrgent,
-                                            _isImportant,
-                                            _character == SingingCharacter.work
-                                                ? 1
-                                                : 2,
-                                          )
-                                        : Entry(
-                                            _titleController.text,
-                                            _todoController.text,
-                                            _isUrgent,
-                                            _isImportant,
-                                            _character == SingingCharacter.work
-                                                ? 1
-                                                : 2,
-                                            _dateString);
+                                    Entry entry = Entry(
+                                        _titleController.text,
+                                        _todoController.text,
+                                        _isUrgent,
+                                        _isImportant,
+                                        _character == SingingCharacter.work
+                                            ? 1
+                                            : 2,
+                                        _selectedDate.toString());
                                     await DBUtilsClass.setEntry(entry);
+                                    _titleController.clear();
+                                    _todoController.clear();
+                                    _isUrgent = false;
+                                    _isImportant = false;
                                     Navigator.of(context).pop();
                                   },
                                 ),

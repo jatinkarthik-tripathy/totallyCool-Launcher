@@ -66,7 +66,6 @@ class _ToDoState extends State<ToDo> {
                                 _toggle1 = !_toggle1;
                                 _toggle2 = _toggle2 ? !_toggle2 : _toggle2;
                                 _toggle3 = _toggle3 ? !_toggle3 : _toggle3;
-                                print(_toggle1);
                               });
                             },
                           ),
@@ -142,7 +141,6 @@ class _ToDoState extends State<ToDo> {
                                 _toggle2 = !_toggle2;
                                 _toggle1 = _toggle1 ? !_toggle1 : _toggle1;
                                 _toggle3 = _toggle3 ? !_toggle3 : _toggle3;
-                                print(_toggle1);
                               });
                             },
                           ),
@@ -218,7 +216,6 @@ class _ToDoState extends State<ToDo> {
                                 _toggle3 = !_toggle3;
                                 _toggle1 = _toggle1 ? !_toggle1 : _toggle1;
                                 _toggle2 = _toggle2 ? !_toggle2 : _toggle2;
-                                print(_toggle1);
                               });
                             },
                           ),

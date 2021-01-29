@@ -8,7 +8,8 @@ class Entry {
   final int category;
 
   Entry(this.title, this.todo, this.isUrgent, this.isImportant, this.category,
-      [this.date, this.id]);
+      this.date,
+      [this.id]);
 
   Map<String, dynamic> toMap() {
     int val1 = isUrgent ? 1 : 0;
