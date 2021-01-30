@@ -53,6 +53,7 @@ class _DisplayPageState extends State<DisplayPage> {
     }
   }
 
+  bool isIgnoring = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -67,8 +68,25 @@ class _DisplayPageState extends State<DisplayPage> {
             size: 32,
             color: Theme.of(context).primaryColor,
           ),
-          onPressed: () => Navigator.pushReplacementNamed(context, '/todo'),
+          onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.delete_rounded,
+              color: Colors.red,
+              size: 32,
+            ),
+            onPressed: () {
+              _titleController.clear();
+              _todoController.clear();
+              _isUrgent = false;
+              _isImportant = false;
+              DBUtilsClass.deleteEntry(widget.entry.id);
+              Navigator.of(context).pop();
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -76,289 +94,297 @@ class _DisplayPageState extends State<DisplayPage> {
           width: size.width,
           padding: EdgeInsets.all(30),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: size.width * 0.4,
-                    child: Text(
-                      "Title:",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: size.width * 0.4,
-                    child: TextField(
-                      controller: _titleController,
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: 3,
+              Expanded(
+                child: IgnorePointer(
+                  ignoring: isIgnoring,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Title:",
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Theme.of(context).accentColor,
-                            width: 3,
+                          SizedBox(
+                            width: size.width * 0.2,
                           ),
-                        ),
-                        hintText: 'Enter title',
-                        hintStyle: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                width: size.width,
-                padding: EdgeInsets.only(left: 10),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "ToDo:",
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: size.width * 0.8,
-                child: TextField(
-                  controller: _todoController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor,
-                        width: 3,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).accentColor,
-                        width: 3,
-                      ),
-                    ),
-                    hintText: 'Enter ToDo',
-                    hintStyle: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: size.width * 0.4,
-                    child: Theme(
-                      data: ThemeData(
-                        unselectedWidgetColor: Theme.of(context).primaryColor,
-                      ),
-                      child: CheckboxListTile(
-                        title: Text(
-                          "Urgent",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
-                        value: _isUrgent,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _isUrgent = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: size.width * 0.4,
-                    child: Theme(
-                      data: ThemeData(
-                        unselectedWidgetColor: Theme.of(context).primaryColor,
-                      ),
-                      child: CheckboxListTile(
-                        title: Text(
-                          "Important",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        activeColor: Theme.of(context).accentColor,
-                        value: _isImportant,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _isImportant = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              _isUrgent
-                  ? Column(
-                      children: [
-                        Text(
-                          "DeadLine : ${_selectedDate.day}-${_selectedDate.month}-${_selectedDate.year}",
-                          style: TextStyle(
-                            fontSize: 24,
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Container(
-                          width: size.width * 0.8,
-                          child: Center(
-                            child: FlatButton(
-                              child: Text(
-                                'Select Date',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).accentColor,
+                          Expanded(
+                            child: TextField(
+                              controller: _titleController,
+                              decoration: InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 3,
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Theme.of(context).accentColor,
+                                    width: 3,
+                                  ),
+                                ),
+                                hintText: 'Enter title',
+                                hintStyle: TextStyle(
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
-                              onPressed: () => _selectDate(context, setState),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        width: size.width,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "ToDo:",
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                      ],
-                    )
-                  : SizedBox(
-                      height: 0,
-                    ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: size.width * 0.4,
-                    child: ListTile(
-                      title: Text(
-                        'Work',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                      ),
+                      Container(
+                        width: size.width * 0.8,
+                        child: TextField(
+                          controller: _todoController,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 3,
+                              ),
+                            ),
+                            disabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 3,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Theme.of(context).accentColor,
+                                width: 3,
+                              ),
+                            ),
+                            hintText: 'Enter ToDo',
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
+                          maxLines: 5,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
-                      leading: Theme(
-                        data: ThemeData(
-                          unselectedWidgetColor: Theme.of(context).primaryColor,
-                        ),
-                        child: Radio(
-                          value: SingingCharacter.work,
-                          groupValue: _character,
-                          activeColor: Theme.of(context).accentColor,
-                          onChanged: (SingingCharacter value) {
-                            setState(() {
-                              _character = value;
-                            });
-                          },
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: size.width * 0.4,
+                            child: Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor:
+                                    Theme.of(context).primaryColor,
+                              ),
+                              child: CheckboxListTile(
+                                title: Text(
+                                  "Urgent",
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                activeColor: Theme.of(context).accentColor,
+                                value: _isUrgent,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    _isUrgent = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: size.width * 0.4,
+                            child: Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor:
+                                    Theme.of(context).primaryColor,
+                              ),
+                              child: CheckboxListTile(
+                                title: Text(
+                                  "Important",
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                activeColor: Theme.of(context).accentColor,
+                                value: _isImportant,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    _isImportant = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
-                  Container(
-                    width: size.width * 0.4,
-                    child: ListTile(
-                      title: Text(
-                        'Personal',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                        ),
+                      _isUrgent
+                          ? Column(
+                              children: [
+                                Text(
+                                  "DeadLine : ${_selectedDate.day}-${_selectedDate.month}-${_selectedDate.year}",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: Theme.of(context).primaryColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Container(
+                                  width: size.width * 0.8,
+                                  child: Center(
+                                    child: FlatButton(
+                                      child: Text(
+                                        'Select Date',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w600,
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
+                                      onPressed: () =>
+                                          _selectDate(context, setState),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : SizedBox(
+                              height: 0,
+                            ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: size.width * 0.4,
+                            child: ListTile(
+                              title: Text(
+                                'Work',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              leading: Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor:
+                                      Theme.of(context).primaryColor,
+                                ),
+                                child: Radio(
+                                  value: SingingCharacter.work,
+                                  groupValue: _character,
+                                  activeColor: Theme.of(context).accentColor,
+                                  onChanged: (SingingCharacter value) {
+                                    setState(() {
+                                      _character = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: size.width * 0.4,
+                            child: ListTile(
+                              title: Text(
+                                'Personal',
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              leading: Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor:
+                                      Theme.of(context).primaryColor,
+                                ),
+                                child: Radio(
+                                  value: SingingCharacter.personal,
+                                  activeColor: Theme.of(context).accentColor,
+                                  groupValue: _character,
+                                  onChanged: (SingingCharacter value) {
+                                    setState(() {
+                                      _character = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      leading: Theme(
-                        data: ThemeData(
-                          unselectedWidgetColor: Theme.of(context).primaryColor,
-                        ),
-                        child: Radio(
-                          value: SingingCharacter.personal,
-                          activeColor: Theme.of(context).accentColor,
-                          groupValue: _character,
-                          onChanged: (SingingCharacter value) {
-                            setState(() {
-                              _character = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                width: size.width * 0.8,
-                child: Center(
-                  child: FlatButton(
-                    child: Text(
-                      'Update Item',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).accentColor,
-                      ),
-                    ),
-                    onPressed: () {
-                      Entry entry = Entry(
-                          _titleController.text,
-                          _todoController.text,
-                          _isUrgent,
-                          _isImportant,
-                          _character == SingingCharacter.work ? 1 : 2,
-                          _selectedDate.toString(),
-                          widget.entry.id);
-
-                      DBUtilsClass.updateEntry(entry);
-                      _titleController.clear();
-                      _todoController.clear();
-                      _isUrgent = false;
-                      _isImportant = false;
-                      Navigator.of(context).pop();
-                    },
+                    ],
                   ),
                 ),
               ),
               Container(
                 width: size.width * 0.8,
+                height: size.height * 0.25,
                 child: Center(
                   child: FlatButton(
                     child: Text(
-                      'Delete',
+                      isIgnoring ? 'Completed' : 'Update Item',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
-                        color: Colors.red,
+                        color: isIgnoring
+                            ? Colors.green
+                            : Theme.of(context).accentColor,
                       ),
                     ),
                     onPressed: () {
-                      _titleController.clear();
-                      _todoController.clear();
-                      _isUrgent = false;
-                      _isImportant = false;
-                      DBUtilsClass.deleteEntry(widget.entry.id);
-                      Navigator.of(context).pop();
+                      if (isIgnoring) {
+                        _titleController.clear();
+                        _todoController.clear();
+                        _isUrgent = false;
+                        _isImportant = false;
+                        DBUtilsClass.deleteEntry(widget.entry.id);
+                        Navigator.of(context).pop();
+                      } else {
+                        Entry entry = Entry(
+                            _titleController.text,
+                            _todoController.text,
+                            _isUrgent,
+                            _isImportant,
+                            _character == SingingCharacter.work ? 1 : 2,
+                            _selectedDate.toString(),
+                            widget.entry.id);
+
+                        DBUtilsClass.updateEntry(entry);
+                        _titleController.clear();
+                        _todoController.clear();
+                        _isUrgent = false;
+                        _isImportant = false;
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ),
@@ -366,6 +392,18 @@ class _DisplayPageState extends State<DisplayPage> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        child: Icon(
+          isIgnoring ? Icons.edit_off : Icons.edit,
+          color: Theme.of(context).backgroundColor,
+        ),
+        onPressed: () {
+          setState(() {
+            isIgnoring = !isIgnoring;
+          });
+        },
       ),
     );
   }

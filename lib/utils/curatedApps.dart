@@ -9,7 +9,7 @@ Future<List<Application>> curatedApps() async {
   List<Application> curatedApps = [];
   List<String> curatedAppList = [
     "Docs",
-    "Sheets",
+    "Youtube",
     "Slides",
     "Drive",
     "Solid Explorer",
@@ -29,5 +29,5 @@ Future<List<Application>> curatedApps() async {
   apps.sort((a, b) {
     return a.appName.compareTo(b.appName);
   });
-  return apps;
+  return curatedApps;
 }

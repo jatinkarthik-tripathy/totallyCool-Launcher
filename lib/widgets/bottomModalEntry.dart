@@ -65,7 +65,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.min,
@@ -81,8 +81,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                             SizedBox(
                               width: size.width * 0.2,
                             ),
-                            Container(
-                              width: size.width * 0.5,
+                            Expanded(
                               child: TextField(
                                 controller: _titleController,
                                 decoration: InputDecoration(
@@ -111,12 +110,20 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                             ),
                           ],
                         ),
-                        Text(
-                          "ToDo:",
-                          style: TextStyle(
-                            fontSize: 24,
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600,
+                        Padding(
+                          padding: const EdgeInsets.all(0.0),
+                          child: Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "ToDo:",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         Container(
@@ -142,7 +149,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                               ),
                             ),
                             maxLines: 3,
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.left,
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                             ),
@@ -295,6 +302,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                           ],
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               width: size.width * 0.4,
