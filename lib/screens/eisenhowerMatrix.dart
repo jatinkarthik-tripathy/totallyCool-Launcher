@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:launcher/widgets/list.dart';
+import 'package:launcher/widgets/styledQueriedList.dart';
 
 class EisenhowerMatrix extends StatelessWidget {
   @override
@@ -9,16 +9,22 @@ class EisenhowerMatrix extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          backgroundColor: Theme.of(context).accentColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           elevation: 0,
-          title: Text("Eisenhower Matrix"),
+          title: Text(
+            "EisenhowerMatrix",
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontSize: 28,
+            ),
+          ),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              size: 24,
-              color: Theme.of(context).backgroundColor,
+              size: 28,
+              color: Theme.of(context).primaryColor,
             ),
-            onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+            onPressed: () => Navigator.pop(context),
           ),
         ),
         body: Container(

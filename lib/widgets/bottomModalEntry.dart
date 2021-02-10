@@ -61,6 +61,7 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                   width: size.width,
                   padding: EdgeInsets.all(30),
                   child: Container(
+                    width: size.width,
                     height: size.height * 0.55,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -68,20 +69,20 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              "Title:",
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.w600,
+                            Container(
+                              width: size.width * 0.3,
+                              child: Text(
+                                "Title:",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
-                            SizedBox(
-                              width: size.width * 0.2,
-                            ),
-                            Expanded(
+                            Container(
+                              width: size.width * 0.5,
                               child: TextField(
                                 controller: _titleController,
                                 decoration: InputDecoration(
@@ -112,16 +113,14 @@ class _BottomModalEntryState extends State<BottomModalEntry> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(0.0),
-                          child: Expanded(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "ToDo:",
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "ToDo:",
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),

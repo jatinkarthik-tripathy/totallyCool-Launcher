@@ -2,14 +2,13 @@ import 'package:device_apps/device_apps.dart';
 
 Future<List<Application>> curatedApps() async {
   List<Application> apps = await DeviceApps.getInstalledApplications(
-    includeAppIcons: false,
-    includeSystemApps: true,
-    onlyAppsWithLaunchIntent: true,
-  );
+      includeAppIcons: true,
+      includeSystemApps: true,
+      onlyAppsWithLaunchIntent: true);
   List<Application> curatedApps = [];
   List<String> curatedAppList = [
     "Docs",
-    "Youtube",
+    "Chrome",
     "Slides",
     "Drive",
     "Solid Explorer",

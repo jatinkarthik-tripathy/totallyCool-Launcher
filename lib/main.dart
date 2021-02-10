@@ -9,30 +9,32 @@ import 'package:launcher/utils/dbUtilsClass.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   DBUtilsClass.initDatabase();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Color(0xFF29A0B1),
-  ));
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final MaterialColor myColor = MaterialColor(
-    0xFF29A0B1,
+    0xFF008080,
     {
-      50: Color(0xFF29A0B1),
-      100: Color(0xFF29A0B1),
-      200: Color(0xFF29A0B1),
-      300: Color(0xFF29A0B1),
-      400: Color(0xFF29A0B1),
-      500: Color(0xFF29A0B1),
-      700: Color(0xFF29A0B1),
-      800: Color(0xFF29A0B1),
-      900: Color(0xFF29A0B1),
+      50: Color(0xFF008080),
+      100: Color(0xFF008080),
+      200: Color(0xFF008080),
+      300: Color(0xFF008080),
+      400: Color(0xFF008080),
+      500: Color(0xFF008080),
+      700: Color(0xFF008080),
+      800: Color(0xFF008080),
+      900: Color(0xFF008080),
     },
   );
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFF000000),
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ));
     return MaterialApp(
       title: 'Launcher',
       theme: ThemeData(
@@ -40,9 +42,9 @@ class MyApp extends StatelessWidget {
         fontFamily: "Poppins",
         primarySwatch: myColor,
         brightness: Brightness.dark,
-        backgroundColor: Color(0xFF202124),
-        primaryColor: Colors.grey[400],
-        accentColor: Color(0xFF29A0B1),
+        backgroundColor: Colors.black,
+        primaryColor: Colors.blueGrey[300],
+        accentColor: Color(0xFF008080),
       ),
       home: MyHomePage(),
       routes: <String, WidgetBuilder>{

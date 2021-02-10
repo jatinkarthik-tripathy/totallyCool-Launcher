@@ -32,7 +32,7 @@ Widget styledQueriedList({
             Entry entry = entries[idx];
             return ListTile(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => DisplayPage(
@@ -47,8 +47,8 @@ Widget styledQueriedList({
               leading: isLeadingNeeded
                   ? CircleAvatar(
                       backgroundColor: entry.category == 1
-                          ? Colors.amber.withOpacity(0.75)
-                          : Colors.purple[400],
+                          ? Color(0xFF800020)
+                          : Color(0xFF07575B),
                       maxRadius: 10,
                     )
                   : entry.category == 1
@@ -72,10 +72,10 @@ Widget styledQueriedList({
               ),
               subtitle: entry.isUrgent
                   ? Text(
-                      "DeadLine : ${DateTime.parse(entry.date).day}-${DateTime.parse(entry.date).month}-${DateTime.parse(entry.date).year}",
+                      "${DateTime.parse(entry.date).day}-${DateTime.parse(entry.date).month}-${DateTime.parse(entry.date).year}",
                       style: TextStyle(
                         fontSize: 16,
-                        color: Theme.of(context).backgroundColor,
+                        color: mainStylingColor,
                         fontWeight: FontWeight.w600,
                       ),
                     )
